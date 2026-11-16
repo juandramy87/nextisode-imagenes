@@ -1,0 +1,64 @@
+{
+ "banner": {
+  "pesos": {
+   "bn": 0.292,
+   "brillo": 0.007,
+   "cara_max": 0.114,
+   "caras": 0.209,
+   "colorido": -0.133,
+   "estetica": 0.048,
+   "idioma_ingles": 0.182,
+   "idioma_original": 0.203,
+   "mucho_texto": -0.117,
+   "promo": -0.024,
+   "reciente": -0.056,
+   "resolucion": -0.0,
+   "sin_caras": -0.36,
+   "sin_idioma": -0.021,
+   "temporada": 0.0,
+   "titulo": 0.042,
+   "utilitaria": 0.0,
+   "votos": 0.373
+  },
+  "reglas": {
+   "estetica": 0,
+   "reciente": 0,
+   "bn": 0,
+   "util": 0,
+   "banner_sin_caras": 3,
+   "solo_logo": 0,
+   "promo": 0
+  }
+ },
+ "poster": {
+  "pesos": {
+   "bn": -0.302,
+   "brillo": -0.042,
+   "cara_max": 0.01,
+   "caras": -0.034,
+   "colorido": 0.005,
+   "estetica": -0.016,
+   "idioma_ingles": 0.193,
+   "idioma_original": 0.286,
+   "mucho_texto": -0.036,
+   "promo": -0.054,
+   "reciente": -0.085,
+   "resolucion": 0.0,
+   "sin_caras": 0.121,
+   "sin_idioma": -0.047,
+   "temporada": 0.0,
+   "titulo": 0.242,
+   "utilitaria": 0.404,
+   "votos": 0.322
+  },
+  "reglas": {
+   "estetica": 0,
+   "reciente": 0,
+   "bn": 2,
+   "util": 0,
+   "banner_sin_caras": 0,
+   "solo_logo": 3,
+   "promo": 3
+  }
+ }
+}
