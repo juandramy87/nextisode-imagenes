@@ -1,0 +1,54 @@
+# Cada lunes elige el mejor banner y póster de las series más populares y publica imagenes.json en GitHub Pages.
+name: Imágenes semanales
+
+on:
+  schedule:
+    - cron: '0 3 * * 1' # lunes a las 03:00 UTC
+  workflow_dispatch:
+    inputs:
+      series:
+        description: 'Cuántas series populares'
+        default: '1000'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: imagenes
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: macos-15 # Vision (caras, texto, estética) solo existe en macOS
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Caché de imágenes y análisis (cada semana solo se analizan las nuevas)
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: imagenes-${{ github.run_id }}
+          restore-keys: imagenes-
+
+      - run: python3 -m pip install --quiet --break-system-packages numpy pillow
+
+      - name: Generar
+        env:
+          TVDB_KEY: ${{ secrets.TVDB_KEY }}
+          TVDB_PIN: ${{ secrets.TVDB_PIN }}
+        run: python3 generar.py --series "${{ inputs.series || '1000' }}" --salida publico/imagenes.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: publico
+
+  publicar:
+    needs: generar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/deploy-pages@v4
