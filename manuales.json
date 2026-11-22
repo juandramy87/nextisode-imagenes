@@ -1,0 +1,96 @@
+{
+ "version": 1,
+ "nota": "Banners y pósters elegidos a mano por el usuario (16/11/2026). Mandan sobre el modelo.",
+ "series": {
+  "79126": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/posters/79126-10.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/graphical/79126-g16.jpg"
+   },
+   "nombre": "The Wire"
+  },
+  "75299": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/75299/posters/64864a74aaf29.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/graphical/75299-g7.jpg"
+   },
+   "nombre": "The Sopranos"
+  },
+  "79337": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/posters/79337-15.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/graphical/79337-g.jpg"
+   },
+   "nombre": "Friday Night Lights"
+  },
+  "121361": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/posters/121361-13.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/graphical/121361-g2.jpg"
+   },
+   "nombre": "Game of Thrones"
+  },
+  "367506": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/367506/posters/660fd96a22c7c.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/367506/banners/6311c7dfb39bc.jpg"
+   },
+   "nombre": "The Lord of the Rings: The Rings of Power"
+  },
+  "450094": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/450094/posters/6ace32e312860.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/450094/banners/6aea2490448a1.jpg"
+   },
+   "nombre": "12 12 12"
+  },
+  "433161": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433161/posters/67300abbb58de.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433161/banners/6730c5368533b.jpg"
+   },
+   "nombre": "Signé Cat's Eyes"
+  },
+  "455562": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/455562/posters/6ae6b1fc996b3.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/455562/banners/684027a2f2955.jpg"
+   },
+   "nombre": "Stick"
+  },
+  "433775": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433775/posters/66af851decfb9.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433775/banners/66cbd82e02c32.jpg"
+   },
+   "nombre": "City of God: The Fight Rages On"
+  },
+  "82753": {
+   "poster": {
+    "url": "https://artworks.thetvdb.com/banners/v4/series/82753/posters/6586d3018b11b.jpg"
+   },
+   "banner": {
+    "url": "https://artworks.thetvdb.com/banners/graphical/82753-g3.jpg"
+   },
+   "nombre": "La que se avecina"
+  }
+ }
+}

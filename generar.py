@@ -162,6 +162,8 @@ def main():
     ap.add_argument('--cache', default=os.path.join(AQUI, 'cache'))
     ap.add_argument('--hilos', type=int, default=8)
     ap.add_argument('--ids', help='ids de TheTVDB separados por comas (para pruebas)')
+    ap.add_argument('--minutos', type=float, default=0, help='a partir de aquí no se analizan series nuevas (0 = sin límite)')
+    ap.add_argument('--dias', type=int, default=28, help='días que vale el resultado guardado de una serie')
     a = ap.parse_args()
     analiza, estetica = compilar_vision(os.path.join(a.cache, 'bin'))
     token = login()
@@ -169,12 +171,33 @@ def main():
     print(f'{len(lista)} series', flush=True)
     salida = {}
     with ThreadPoolExecutor(a.hilos) as ex:
-        for (tvdb, nombre), r in zip(lista, ex.map(lambda s: _seguro(procesar, s[0], s[1], token, a.cache, analiza, estetica), lista)):
+        for (tvdb, nombre), r in zip(lista, ex.map(lambda s: _con_cache(s[0], s[1], token, a, analiza, estetica), lista)):
             if r: salida[str(tvdb)] = r
             print(('✓ ' if r else '· ') + (nombre or str(tvdb)), flush=True)
+    # Las elegidas a mano por el usuario mandan sobre el modelo.
+    for k, v in json.load(open(os.path.join(AQUI, 'manuales.json')))['series'].items():
+        salida[k] = {**salida.get(k, {}), **{t: v[t] for t in ('banner', 'poster') if t in v}}
     os.makedirs(os.path.dirname(a.salida), exist_ok=True)
     json.dump({'version': 1, 'generado': time.strftime('%Y-%m-%d'), 'series': salida}, open(a.salida, 'w'), separators=(',', ':'), ensure_ascii=False)
     print(f'{len(salida)} series en {a.salida} ({os.path.getsize(a.salida) // 1024} KB)')
+
+INICIO = time.time()
+
+def _con_cache(tvdb, nombre, token, a, analiza, estetica):
+    """Resultado guardado de la serie si vale todavía; si no, se analiza mientras quede tiempo.
+    Así una ejecución que no llega a todas deja hecho lo que ha podido y la siguiente sigue por ahí."""
+    f = os.path.join(a.cache, str(tvdb), 'resultado.json')
+    try:
+        if time.time() - os.path.getmtime(f) < a.dias * 86400: return json.load(open(f))['r']
+    except Exception: pass
+    if a.minutos and time.time() - INICIO > a.minutos * 60:
+        try: return json.load(open(f))['r']  # caducado, pero mejor que nada
+        except Exception: return None
+    r = _seguro(procesar, tvdb, nombre, token, a.cache, analiza, estetica)
+    if r is not None:
+        os.makedirs(os.path.dirname(f), exist_ok=True)
+        json.dump({'r': r}, open(f, 'w'))
+    return r
 
 def _seguro(f, *args):
     try: return f(*args)

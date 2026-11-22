@@ -26,8 +26,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Caché de imágenes y análisis (cada semana solo se analizan las nuevas)
-        uses: actions/cache@v4
+      # La caché se recupera al empezar y se guarda SIEMPRE al acabar (también si se corta): así cada semana
+      # sigue donde lo dejó la anterior. Cada serie guarda su resultado 28 días.
+      - name: Recuperar caché de imágenes y análisis
+        uses: actions/cache/restore@v4
         with:
           path: cache
           key: imagenes-${{ github.run_id }}
@@ -39,7 +41,15 @@ jobs:
         env:
           TVDB_KEY: ${{ secrets.TVDB_KEY }}
           TVDB_PIN: ${{ secrets.TVDB_PIN }}
-        run: python3 generar.py --series "${{ inputs.series || '1000' }}" --salida publico/imagenes.json
+        # Deja de analizar series nuevas a las 4 h 50 min y publica lo que tenga (cada serie tarda ~100 s).
+        run: python3 generar.py --series "${{ inputs.series || '1000' }}" --minutos 290 --salida publico/imagenes.json
+
+      - name: Guardar caché de imágenes y análisis
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: imagenes-${{ github.run_id }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
